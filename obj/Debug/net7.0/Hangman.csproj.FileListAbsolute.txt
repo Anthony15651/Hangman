@@ -1,0 +1,14 @@
+C:\Users\antho\OneDrive\Documents\GitHub\Hangman\bin\Debug\net7.0\Hangman.exe
+C:\Users\antho\OneDrive\Documents\GitHub\Hangman\bin\Debug\net7.0\Hangman.deps.json
+C:\Users\antho\OneDrive\Documents\GitHub\Hangman\bin\Debug\net7.0\Hangman.runtimeconfig.json
+C:\Users\antho\OneDrive\Documents\GitHub\Hangman\bin\Debug\net7.0\Hangman.dll
+C:\Users\antho\OneDrive\Documents\GitHub\Hangman\bin\Debug\net7.0\Hangman.pdb
+C:\Users\antho\OneDrive\Documents\GitHub\Hangman\obj\Debug\net7.0\Hangman.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\antho\OneDrive\Documents\GitHub\Hangman\obj\Debug\net7.0\Hangman.AssemblyInfoInputs.cache
+C:\Users\antho\OneDrive\Documents\GitHub\Hangman\obj\Debug\net7.0\Hangman.AssemblyInfo.cs
+C:\Users\antho\OneDrive\Documents\GitHub\Hangman\obj\Debug\net7.0\Hangman.csproj.CoreCompileInputs.cache
+C:\Users\antho\OneDrive\Documents\GitHub\Hangman\obj\Debug\net7.0\Hangman.dll
+C:\Users\antho\OneDrive\Documents\GitHub\Hangman\obj\Debug\net7.0\refint\Hangman.dll
+C:\Users\antho\OneDrive\Documents\GitHub\Hangman\obj\Debug\net7.0\Hangman.pdb
+C:\Users\antho\OneDrive\Documents\GitHub\Hangman\obj\Debug\net7.0\Hangman.genruntimeconfig.cache
+C:\Users\antho\OneDrive\Documents\GitHub\Hangman\obj\Debug\net7.0\ref\Hangman.dll
