@@ -5,8 +5,9 @@ int guesses = 0;
 string? userInput = "";
 bool gameIsPlaying = false;
 bool programRunning = true;
-char[] incorrectGuesses = new char[26];
+char[] userGuesses = new char[0];
 
+// Random words for computer
 Random random = new Random();
 string[] randomWords = { "commemorate", "concentrate", "freedom", "reveal", "despise", "relieve", "radiation", "simplicity", "sensitivity", "repetition", "impact", "cunning", "cellar", "dominant", "intervention", "familiar", "connection", "socialist", "revival", "dentist", "report", "temple", "hilarious", "spectrum", "photography", "assume", "improve", "agreement", "package", "psychology" };
 
@@ -14,14 +15,14 @@ string[] randomWords = { "commemorate", "concentrate", "freedom", "reveal", "des
 while (programRunning)
 {
     // Startup
-    Console.Clear();
+    // Console.Clear();
     Console.WriteLine("Welcome to hangman. Please select a game mode:\n1. Player vs Player\n2. Player vs Computer\n");
     userInput = Console.ReadLine();
     switch (userInput)
     {
         // Player vs Player
         case "1":
-            Console.Clear();
+            // Console.Clear();
             Console.WriteLine("Player vs Player\n\nPlayer 1, please enter a word to begin:");
             bool validEntry = false;
             guesses = 5;
@@ -42,7 +43,7 @@ while (programRunning)
                     }
                     else
                     {
-                        userInput.ToLower().Trim();
+                        userInput = userInput.ToLower().Trim();
                         hiddenWord = userInput;
                         Console.WriteLine("Your word has been saved! Press Enter to begin the game.");
                         Console.ReadLine();
@@ -52,7 +53,7 @@ while (programRunning)
             }
 
             // Show '_'s in terminal in place of letters
-            Console.Clear();
+            // Console.Clear();
             char[] letters = hiddenWord.ToCharArray();
             char[] lettersCopy = new char[hiddenWord.Length];
 
@@ -74,14 +75,14 @@ while (programRunning)
             break;
         // Player vs Computer
         case "2":
-            Console.Clear();
+            // Console.Clear();
             Console.WriteLine("Player vs Computer\n\n");
             guesses = 5;
             hiddenWord = randomWords[random.Next(0, randomWords.Length)];
-            
+
 
             // Show '_'s in terminal in place of letters
-            Console.Clear();
+            // Console.Clear();
             letters = hiddenWord.ToCharArray();
             lettersCopy = new char[hiddenWord.Length];
 
@@ -102,7 +103,7 @@ while (programRunning)
             programRunning = PlayAgain();
             break;
         default:
-            Console.WriteLine("Please enter '1' or '2'.");
+            Console.WriteLine("You must enter a number with a corresponding menu option.");
             Console.ReadLine();
             break;
     }
@@ -115,19 +116,31 @@ void Guess(char[] letters, char[] lettersCopy)
     while (!validEntry)
     {
         Console.WriteLine("Please guess a letter.");
+        DisplayGuesses();
         WriteWord(lettersCopy);
         userInput = Console.ReadLine();
         if (userInput != null && userInput != "")
         {
-            if (userInput.Length == 1)
-            {
-                CheckGuess(userInput, letters, lettersCopy);
-                validEntry = true;
-            }
-            else
+            userInput = userInput.ToLower().Trim();
+            if (userInput.Length != 1)
             {
                 Console.WriteLine("\nOnly 1 letter at a time!");
             }
+            else if (!char.IsLetter(userInput, 0))
+            {
+                Console.WriteLine("Your guess must be a letter.");
+            }
+            else if (userGuesses.Contains(Convert.ToChar(userInput)))
+            {
+                Console.WriteLine("You've already guessed that letter!");
+            }
+            else
+            {
+                AddGuess(userInput);
+                CheckGuess(userInput, letters, lettersCopy);
+                validEntry = true;
+            }
+
         }
     }
 }
@@ -193,6 +206,7 @@ void CheckForWin(char[] lettersCopy)
     }
 }
 
+// Asks user if they'd like to play again, and clears guess array
 bool PlayAgain()
 {
     Console.WriteLine("\nWould you like to play again? (Y / N)");
@@ -201,11 +215,36 @@ bool PlayAgain()
     {
         userInput = Console.ReadLine();
         if (userInput.ToLower().Trim() == "y")
+        {
+            Array.Resize(ref userGuesses, 0);
             return true;
+        }
         else if (userInput.ToLower().Trim() == "n")
+        {
             return false;
+        }
         else
+        {
             Console.WriteLine("Please enter 'Y' or 'N'.");
+        }
     }
     return false;
+}
+
+// Adds user's guess to previous guesses
+void AddGuess(string letter)
+{
+    Array.Resize(ref userGuesses, userGuesses.Length + 1);
+    userGuesses[userGuesses.Length - 1] = Convert.ToChar(letter);
+}
+
+// Displays the users previous guesses
+void DisplayGuesses()
+{
+    Console.WriteLine("Guesses so far:");
+    foreach (char letter in userGuesses)
+    {
+        Console.Write(letter + " ");
+    }
+    Console.WriteLine();
 }
