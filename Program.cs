@@ -1,64 +1,111 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 string hiddenWord = "";
-int guesses = 5;
+int guesses = 0;
 string? userInput = "";
 bool gameIsPlaying = false;
 bool programRunning = true;
+char[] incorrectGuesses = new char[26];
+
+Random random = new Random();
+string[] randomWords = { "commemorate", "concentrate", "freedom", "reveal", "despise", "relieve", "radiation", "simplicity", "sensitivity", "repetition", "impact", "cunning", "cellar", "dominant", "intervention", "familiar", "connection", "socialist", "revival", "dentist", "report", "temple", "hilarious", "spectrum", "photography", "assume", "improve", "agreement", "package", "psychology" };
 
 
 while (programRunning)
 {
     // Startup
     Console.Clear();
-    Console.WriteLine("Welcome to hangman!\n\nPlease enter a word to begin:");
-    bool validEntry = false;
-    while (!validEntry)
+    Console.WriteLine("Welcome to hangman. Please select a game mode:\n1. Player vs Player\n2. Player vs Computer\n");
+    userInput = Console.ReadLine();
+    switch (userInput)
     {
-        userInput = Console.ReadLine();
-        if (userInput != null && userInput != "")
-        {
-            // Checks for user's word - it must be at least 5
-            // letters long and cannot contain any spaces
-            if (userInput.Length < 5)
+        // Player vs Player
+        case "1":
+            Console.Clear();
+            Console.WriteLine("Player vs Player\n\nPlayer 1, please enter a word to begin:");
+            bool validEntry = false;
+            guesses = 5;
+            while (!validEntry)
             {
-                Console.WriteLine("Your word must be at least 5 letters long.");
+                userInput = Console.ReadLine();
+                if (userInput != null && userInput != "")
+                {
+                    // Checks for user's word - it must be at least 5
+                    // letters long and cannot contain any spaces
+                    if (userInput.Length < 5)
+                    {
+                        Console.WriteLine("Your word must be at least 5 letters long.");
+                    }
+                    else if (userInput.Contains(' '))
+                    {
+                        Console.WriteLine("Your word cannot contain any spaces.");
+                    }
+                    else
+                    {
+                        userInput.ToLower().Trim();
+                        hiddenWord = userInput;
+                        Console.WriteLine("Your word has been saved! Press Enter to begin the game.");
+                        Console.ReadLine();
+                        validEntry = true;
+                    }
+                }
             }
-            else if (userInput.Contains(' '))
+
+            // Show '_'s in terminal in place of letters
+            Console.Clear();
+            char[] letters = hiddenWord.ToCharArray();
+            char[] lettersCopy = new char[hiddenWord.Length];
+
+            for (int i = 0; i < lettersCopy.Length; i++)
             {
-                Console.WriteLine("Your word cannot contain any spaces.");
+                lettersCopy[i] = '_';
             }
-            else
+            Console.WriteLine("\n\n");
+
+            // Loop to take user's guess, then check for win conditions
+            gameIsPlaying = true;
+            while (gameIsPlaying)
             {
-                userInput.ToLower().Trim();
-                hiddenWord = userInput;
-                Console.WriteLine("Your word has been saved! Press Enter to begin the game.");
-                Console.ReadLine();
-                validEntry = true;
+                Guess(letters, lettersCopy);
+                CheckForWin(lettersCopy);
             }
-        }
+
+            programRunning = PlayAgain();
+            break;
+        // Player vs Computer
+        case "2":
+            Console.Clear();
+            Console.WriteLine("Player vs Computer\n\n");
+            guesses = 5;
+            hiddenWord = randomWords[random.Next(0, randomWords.Length)];
+            
+
+            // Show '_'s in terminal in place of letters
+            Console.Clear();
+            letters = hiddenWord.ToCharArray();
+            lettersCopy = new char[hiddenWord.Length];
+
+            for (int i = 0; i < lettersCopy.Length; i++)
+            {
+                lettersCopy[i] = '_';
+            }
+            Console.WriteLine("\n\n");
+
+            // Loop to take user's guess, then check for win conditions
+            gameIsPlaying = true;
+            while (gameIsPlaying)
+            {
+                Guess(letters, lettersCopy);
+                CheckForWin(lettersCopy);
+            }
+
+            programRunning = PlayAgain();
+            break;
+        default:
+            Console.WriteLine("Please enter '1' or '2'.");
+            Console.ReadLine();
+            break;
     }
-
-    // Show '_'s in terminal in place of letters
-    Console.Clear();
-    char[] letters = hiddenWord.ToCharArray();
-    char[] lettersCopy = new char[hiddenWord.Length];
-
-    for (int i = 0; i < lettersCopy.Length; i++)
-    {
-        lettersCopy[i] = '_';
-    }
-    Console.WriteLine("\n\n");
-
-    // Loop to take user's guess, then check for win conditions
-    gameIsPlaying = true;
-    while (gameIsPlaying)
-    {
-        Guess(letters, lettersCopy);
-        CheckForWin(lettersCopy);
-    }
-
-    programRunning = PlayAgain();
 }
 
 // Asks player for a letter to check
@@ -100,10 +147,11 @@ void CheckGuess(string letter, char[] letters, char[] lettersCopy)
         if (guesses > 0)
         {
             Console.WriteLine($"\nThat guess is not correct. You have {(guesses > 1 ? guesses + " guesses remaining." : guesses + " guess remaining.")}");
+            // Need to add code to show which letters have been guessed
         }
         else
         {
-            Console.WriteLine("Oh no! You've run out of guesses.");
+            Console.WriteLine($"Oh no! You've run out of guesses.\nThe word was {hiddenWord}.");
             gameIsPlaying = false;
         }
     }
