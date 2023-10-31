@@ -7,8 +7,19 @@
   "targets": {
     ".NETCoreApp,Version=v7.0": {
       "Hangman/1.0.0": {
+        "dependencies": {
+          "CrypticWizard.RandomWordGenerator": "0.9.5"
+        },
         "runtime": {
           "Hangman.dll": {}
+        }
+      },
+      "CrypticWizard.RandomWordGenerator/0.9.5": {
+        "runtime": {
+          "lib/net6.0/RandomWordGenerator.dll": {
+            "assemblyVersion": "0.9.5.0",
+            "fileVersion": "0.9.5.0"
+          }
         }
       }
     }
@@ -18,6 +29,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "CrypticWizard.RandomWordGenerator/0.9.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3JXTo0kZn7bsbKzhJ+9HGxK8JmXmOT0PhvvQWFy9UsOS7YICI5QSjFKt+RSL8GbMQYQH4bmzAZLG8OFPZnQheg==",
+      "path": "crypticwizard.randomwordgenerator/0.9.5",
+      "hashPath": "crypticwizard.randomwordgenerator.0.9.5.nupkg.sha512"
     }
   }
 }

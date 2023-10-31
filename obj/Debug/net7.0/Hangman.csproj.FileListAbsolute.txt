@@ -12,3 +12,6 @@ C:\Users\antho\OneDrive\Documents\GitHub\Hangman\obj\Debug\net7.0\refint\Hangman
 C:\Users\antho\OneDrive\Documents\GitHub\Hangman\obj\Debug\net7.0\Hangman.pdb
 C:\Users\antho\OneDrive\Documents\GitHub\Hangman\obj\Debug\net7.0\Hangman.genruntimeconfig.cache
 C:\Users\antho\OneDrive\Documents\GitHub\Hangman\obj\Debug\net7.0\ref\Hangman.dll
+C:\Users\antho\OneDrive\Documents\GitHub\Hangman\bin\Debug\net7.0\RandomWordGenerator.dll
+C:\Users\antho\OneDrive\Documents\GitHub\Hangman\obj\Debug\net7.0\Hangman.csproj.AssemblyReference.cache
+C:\Users\antho\OneDrive\Documents\GitHub\Hangman\obj\Debug\net7.0\Hangman.csproj.CopyComplete

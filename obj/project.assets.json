@@ -1,11 +1,41 @@
 {
   "version": 3,
   "targets": {
-    "net7.0": {}
+    "net7.0": {
+      "CrypticWizard.RandomWordGenerator/0.9.5": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/RandomWordGenerator.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/RandomWordGenerator.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "CrypticWizard.RandomWordGenerator/0.9.5": {
+      "sha512": "3JXTo0kZn7bsbKzhJ+9HGxK8JmXmOT0PhvvQWFy9UsOS7YICI5QSjFKt+RSL8GbMQYQH4bmzAZLG8OFPZnQheg==",
+      "type": "package",
+      "path": "crypticwizard.randomwordgenerator/0.9.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "README.md",
+        "crypticwizard.randomwordgenerator.0.9.5.nupkg.sha512",
+        "crypticwizard.randomwordgenerator.nuspec",
+        "icon.png",
+        "lib/net5.0/RandomWordGenerator.dll",
+        "lib/net6.0/RandomWordGenerator.dll",
+        "lib/netcoreapp3.1/RandomWordGenerator.dll"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    "net7.0": []
+    "net7.0": [
+      "CrypticWizard.RandomWordGenerator >= 0.9.5"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\antho\\.nuget\\packages\\": {},
@@ -50,6 +80,12 @@
     "frameworks": {
       "net7.0": {
         "targetAlias": "net7.0",
+        "dependencies": {
+          "CrypticWizard.RandomWordGenerator": {
+            "target": "Package",
+            "version": "[0.9.5, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",

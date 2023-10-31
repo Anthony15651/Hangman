@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using CrypticWizard.RandomWordGenerator;
 
 string hiddenWord = "";
 int guesses = 0;
@@ -7,22 +8,24 @@ bool gameIsPlaying = false;
 bool programRunning = true;
 char[] userGuesses = new char[0];
 
-// Random words for computer
-Random random = new Random();
-string[] randomWords = { "commemorate", "concentrate", "freedom", "reveal", "despise", "relieve", "radiation", "simplicity", "sensitivity", "repetition", "impact", "cunning", "cellar", "dominant", "intervention", "familiar", "connection", "socialist", "revival", "dentist", "report", "temple", "hilarious", "spectrum", "photography", "assume", "improve", "agreement", "package", "psychology" };
+WordGenerator wordGenerator = new WordGenerator();
+
+// Hardcoded words for computer - not needed since I'm using a random word generator
+// Random random = new Random();
+// string[] randomWords = { "commemorate", "concentrate", "freedom", "reveal", "despise", "relieve", "radiation", "simplicity", "sensitivity", "repetition", "impact", "cunning", "cellar", "dominant", "intervention", "familiar", "connection", "socialist", "revival", "dentist", "report", "temple", "hilarious", "spectrum", "photography", "assume", "improve", "agreement", "package", "psychology" };
 
 
 while (programRunning)
 {
     // Startup
-    // Console.Clear();
+    Console.Clear();
     Console.WriteLine("Welcome to hangman. Please select a game mode:\n1. Player vs Player\n2. Player vs Computer\n");
     userInput = Console.ReadLine();
     switch (userInput)
     {
         // Player vs Player
         case "1":
-            // Console.Clear();
+            Console.Clear();
             Console.WriteLine("Player vs Player\n\nPlayer 1, please enter a word to begin:");
             bool validEntry = false;
             guesses = 5;
@@ -53,7 +56,7 @@ while (programRunning)
             }
 
             // Show '_'s in terminal in place of letters
-            // Console.Clear();
+            Console.Clear();
             char[] letters = hiddenWord.ToCharArray();
             char[] lettersCopy = new char[hiddenWord.Length];
 
@@ -75,14 +78,21 @@ while (programRunning)
             break;
         // Player vs Computer
         case "2":
-            // Console.Clear();
+            Console.Clear();
             Console.WriteLine("Player vs Computer\n\n");
             guesses = 5;
-            hiddenWord = randomWords[random.Next(0, randomWords.Length)];
+
+            do
+            {
+                hiddenWord = wordGenerator.GetWord();
+            } while (hiddenWord.Length < 7); // Set the size of the word here
+
+            // Use this code when using the hardcoded words
+            // hiddenWord = randomWords[random.Next(0, randomWords.Length)];
 
 
             // Show '_'s in terminal in place of letters
-            // Console.Clear();
+            Console.Clear();
             letters = hiddenWord.ToCharArray();
             lettersCopy = new char[hiddenWord.Length];
 
@@ -182,6 +192,7 @@ void ShowLetter(char letter, char[] letters, char[] lettersCopy)
     }
 }
 
+// Writes lettersCopy array to console
 void WriteWord(char[] lettersCopy)
 {
     Console.WriteLine();
@@ -192,6 +203,7 @@ void WriteWord(char[] lettersCopy)
     Console.WriteLine("\n");
 }
 
+// Checks array to see if all letters have been guessed
 void CheckForWin(char[] lettersCopy)
 {
     if (lettersCopy.Contains('_'))
