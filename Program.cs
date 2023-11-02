@@ -253,10 +253,13 @@ void AddGuess(string letter)
 // Displays the users previous guesses
 void DisplayGuesses()
 {
-    Console.WriteLine("Guesses so far:");
-    foreach (char letter in userGuesses)
+    if (userGuesses.Length > 0)
     {
-        Console.Write(letter + " ");
+        Console.WriteLine("Guesses so far:");
+        foreach (char letter in userGuesses)
+        {
+            Console.Write(letter + " ");
+        }
+        Console.WriteLine();
     }
-    Console.WriteLine();
 }
