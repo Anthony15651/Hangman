@@ -23,10 +23,10 @@ while (programRunning)
     userInput = Console.ReadLine();
     switch (userInput)
     {
-        // Player vs Player
+        // Player vs Player ---------------------------------------------------------------------------------
         case "1":
             Console.Clear();
-            Console.WriteLine("Player vs Player\n\nPlayer 1, please enter a word to begin:");
+            Console.WriteLine("Player vs Player\nPlayer 1, please enter a word to begin:");
             bool validEntry = false;
             guesses = 5;
             while (!validEntry)
@@ -76,23 +76,66 @@ while (programRunning)
 
             programRunning = PlayAgain();
             break;
-        // Player vs Computer
+        // Player vs Computer -------------------------------------------------------------------------------
         case "2":
             Console.Clear();
-            Console.WriteLine("Player vs Computer\n\n");
+            Console.WriteLine("Player vs Computer\n");
             guesses = 5;
+            bool validSelection = false;
 
-            do
+            while (!validSelection)
             {
-                hiddenWord = wordGenerator.GetWord();
-            } while (hiddenWord.Length < 7); // Set the size of the word here
+                // Difficulty selection
+                Console.WriteLine("Please select a difficulty:\n1. Easy\n2. Medium\n3. Hard\n");
+                userInput = Console.ReadLine();
+                switch (userInput)
+                {
+                    case "1":
+                        Console.Clear();
+                        Console.WriteLine("Easy");
+                        validSelection = true;
+
+                        do
+                        {
+                            hiddenWord = wordGenerator.GetWord();
+                        } while (hiddenWord.Length < 10); // Set the size of the word here
+                        
+                        break;
+                    case "2":
+                        Console.Clear();
+                        Console.WriteLine("Medium");
+                        validSelection = true;
+
+                        do
+                        {
+                            hiddenWord = wordGenerator.GetWord();
+                        } while (hiddenWord.Length < 7); // Set the size of the word here
+
+                        break;
+                    case "3":
+                        Console.Clear();
+                        Console.WriteLine("Hard");
+                        validSelection = true;
+
+                        do
+                        {
+                            hiddenWord = wordGenerator.GetWord();
+                        } while (hiddenWord.Length > 5 && hiddenWord.Length <= 7); // Set the size of the word here
+
+                        break;
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("You must enter a number with a cooresponding menu option.");
+                        Console.ReadLine();
+                        break;
+                }
+            }
 
             // Use this code when using the hardcoded words
             // hiddenWord = randomWords[random.Next(0, randomWords.Length)];
 
 
             // Show '_'s in terminal in place of letters
-            Console.Clear();
             letters = hiddenWord.ToCharArray();
             lettersCopy = new char[hiddenWord.Length];
 
@@ -100,7 +143,6 @@ while (programRunning)
             {
                 lettersCopy[i] = '_';
             }
-            Console.WriteLine("\n\n");
 
             // Loop to take user's guess, then check for win conditions
             gameIsPlaying = true;
@@ -113,6 +155,7 @@ while (programRunning)
             programRunning = PlayAgain();
             break;
         default:
+            Console.Clear();
             Console.WriteLine("You must enter a number with a corresponding menu option.");
             Console.ReadLine();
             break;
