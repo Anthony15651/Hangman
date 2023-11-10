@@ -2,9 +2,9 @@
 using CrypticWizard.RandomWordGenerator;
 
 string hiddenWord = "";
+string? userInput;
+bool gameIsPlaying;
 int guesses = 0;
-string? userInput = "";
-bool gameIsPlaying = false;
 bool programRunning = true;
 char[] userGuesses = new char[0];
 
@@ -18,6 +18,8 @@ WordGenerator wordGenerator = new WordGenerator();
 while (programRunning)
 {
     // Startup
+    bool validEntry;
+
     Console.Clear();
     Console.WriteLine("Welcome to hangman. Please select a game mode:\n1. Player vs Player\n2. Player vs Computer\n");
     userInput = Console.ReadLine();
@@ -27,7 +29,7 @@ while (programRunning)
         case "1":
             Console.Clear();
             Console.WriteLine("Player vs Player\nPlayer 1, please enter a word to begin:");
-            bool validEntry = false;
+            validEntry = false;
             guesses = 5;
             while (!validEntry)
             {
@@ -98,7 +100,7 @@ while (programRunning)
                         do
                         {
                             hiddenWord = wordGenerator.GetWord();
-                        } while (hiddenWord.Length < 10); // Set the size of the word here
+                        } while (hiddenWord.Length < 10 || !CheckWord(hiddenWord)); // Set the size of easy words here
                         
                         break;
                     case "2":
@@ -109,7 +111,7 @@ while (programRunning)
                         do
                         {
                             hiddenWord = wordGenerator.GetWord();
-                        } while (hiddenWord.Length < 7); // Set the size of the word here
+                        } while (hiddenWord.Length < 7 || hiddenWord.Length > 9 || !CheckWord(hiddenWord)); // Set the size of medium words here
 
                         break;
                     case "3":
@@ -120,7 +122,7 @@ while (programRunning)
                         do
                         {
                             hiddenWord = wordGenerator.GetWord();
-                        } while (hiddenWord.Length > 5 && hiddenWord.Length <= 7); // Set the size of the word here
+                        } while (hiddenWord.Length < 4 || hiddenWord.Length > 6 || !CheckWord(hiddenWord)); // Set the size of hard words here
 
                         break;
                     default:
@@ -305,4 +307,18 @@ void DisplayGuesses()
         }
         Console.WriteLine();
     }
+}
+
+// Checks randomly generated word to make sure it only contains letters
+bool CheckWord(string hiddenWord)
+{
+    char[] letters = hiddenWord.ToCharArray();
+
+    foreach (char letter in letters)
+    {
+        if (!char.IsLetter(letter))
+            return false;
+    }
+
+    return true;
 }
