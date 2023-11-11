@@ -31,6 +31,8 @@ while (programRunning)
             Console.WriteLine("Player vs Player\nPlayer 1, please enter a word to begin:");
             validEntry = false;
             guesses = 5;
+
+            // Loop for Player 1 to enter word
             while (!validEntry)
             {
                 userInput = Console.ReadLine();
@@ -69,6 +71,7 @@ while (programRunning)
             Console.WriteLine("Player Two:\n");
 
             // Loop to take user's guess, then check for win conditions
+            // This loops until the player either guesses the word or runs out of guesses
             gameIsPlaying = true;
             while (gameIsPlaying)
             {
@@ -97,6 +100,7 @@ while (programRunning)
                         Console.WriteLine("Easy");
                         validSelection = true;
 
+                        // Easy words are longer than 10 letters
                         do
                         {
                             hiddenWord = wordGenerator.GetWord();
@@ -108,6 +112,7 @@ while (programRunning)
                         Console.WriteLine("Medium");
                         validSelection = true;
 
+                        // Medium words are between 7 and 9 letters
                         do
                         {
                             hiddenWord = wordGenerator.GetWord();
@@ -119,6 +124,7 @@ while (programRunning)
                         Console.WriteLine("Hard");
                         validSelection = true;
 
+                        // Hard words are between 4 and 6 letters
                         do
                         {
                             hiddenWord = wordGenerator.GetWord();
@@ -147,6 +153,7 @@ while (programRunning)
             }
 
             // Loop to take user's guess, then check for win conditions
+            // This loops until the player either guesses the word or runs out of guesses
             gameIsPlaying = true;
             while (gameIsPlaying)
             {
