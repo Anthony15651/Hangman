@@ -42,9 +42,9 @@ while (programRunning)
                     {
                         Console.WriteLine("Your word must be at least 5 letters long.");
                     }
-                    else if (userInput.Contains(' '))
+                    else if (!CheckWord(userInput))
                     {
-                        Console.WriteLine("Your word cannot contain any spaces.");
+                        Console.WriteLine("Your word must contain only letters");
                     }
                     else
                     {
@@ -66,7 +66,7 @@ while (programRunning)
             {
                 lettersCopy[i] = '_';
             }
-            Console.WriteLine("\n\n");
+            Console.WriteLine("Player Two:\n");
 
             // Loop to take user's guess, then check for win conditions
             gameIsPlaying = true;
@@ -219,7 +219,7 @@ void CheckGuess(string letter, char[] letters, char[] lettersCopy)
         }
         else
         {
-            Console.WriteLine($"Oh no! You've run out of guesses.\nThe word was {hiddenWord}.");
+            Console.WriteLine($"Oh no! You've run out of guesses.\nThe word was '{hiddenWord}'.");
             gameIsPlaying = false;
         }
     }
